@@ -1,0 +1,8 @@
+server:
+  dev: true
+  port: 8988
+
+ovpn:
+  config: /etc/openvpn/openvpn.conf
+  pki: /etc/openvpn/pki/ca.crt
+  mgmt: 127.0.0.1:8989
