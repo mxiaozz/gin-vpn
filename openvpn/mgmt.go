@@ -147,12 +147,10 @@ func (m *ovpnMgmt) Execute(cmd string) (*domain.MgmtRequest, error) {
 	req := &domain.MgmtRequest{Command: cmd}
 	m.reqChan <- req
 
-	for {
-		select {
-		case r := <-m.rspChan:
-			return r, nil
-		case <-time.After(10 * time.Second):
-			return nil, errors.New("read timeout")
-		}
+	select {
+	case r := <-m.rspChan:
+		return r, nil
+	case <-time.After(10 * time.Second):
+		return nil, errors.New("read timeout")
 	}
 }
